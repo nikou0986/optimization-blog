@@ -1,0 +1,383 @@
+---
+title: "Linear Programming: The Foundation of Optimization"
+author: "Nicole Zhou"
+date: "2026-06-21"
+categories: [Optimization, Linear Programming]
+---
+
+# 1. Why Linear Programming?
+
+Many real-world decision problems can be approximated using linear relationships. For example, suppose a factory produces identical water bottles and earns \$2 profit on each bottle sold. Producing 100 bottles generates \$200 profit, while producing 200 bottles generates \$400 profit. Each additional bottle increases profit by exactly \$2, making the relationship linear.
+
+Linear programming is attractive because it is:
+
+- Intuitive and easy to explain.
+- Often a reasonable approximation of more complex systems.
+
+Of course, real-world systems are often more complicated than a linear programming model suggests. Once we introduce assumptions such as economies of scale, learning effects, nonlinear costs, or interactions between decisions, the relationship may no longer be linear. Nevertheless, linear programming provides a useful starting point and serves as the foundation for more advanced optimization methods.
+
+## 2. What does "Linear" Mean?
+
+A function is linear if:
+
+- Variables only appear to the first power.
+
+This means that:
+
+- Variables are not multiplied together.
+- Variables are not divided by each other.
+- No logarithms, exponentials, or trigonometric functions appear.
+
+### Linear Examples
+
+$$3x + 5y \le 100$$
+
+$$\frac{1}{2}x + \frac{3}{4}y \le 20$$
+
+$$2(x+y) \le 5$$
+
+### Nonlinear Examples
+
+$$xy \le 100$$ $$\frac{x}{y} \le 20$$ $$\frac{1}{x} \le 3$$ $$2xy + z \le 5$$
+
+# 3. Components of a Linear Programming Model
+
+Every linear programming model contains four main components:
+
+1.  Decision Variables
+2.  Coefficients(parameters)
+3.  Objective Function
+4.  Constraints
+
+In a linear programming model, **both the objective function and all constraints must satisfy the rules of linearity** which we discussed above. 
+
+## 3.1 Decision Variables
+
+- Decision variables represent the choices we can make, but whose values are not yet known.
+- The optimization model determines the values of these variables that produce the best outcome while satisfying all constraints.
+
+#### Starting from One-dimensional decision variables
+
+- A common notation is $x_i$, where $i$ identifies a product or activity. You can also name decision variables in whatever way best reflects the problem being modeled. In a make-or-buy problem, we might let $M_i$ represent the quantity manufactured internally and $B_i$ represent the quantity purchased externally. Similarly, we could use $P_i$, $I_i$, or any other notation, as long as the meaning is clearly defined.
+- The index can be defined numerically, such as $i = 1,2,\ldots,n$, or it can represent elements of a set. For example, let $P = \{\text{Apple}, \text{Orange}, \text{Kiwi}, \text{Strawberry}\}$. Then $i \in P$.
+
+#### Multi-dimensional decision variables
+
+Decision variables may even contain three or more indices.
+
+- Example: $x_{i,j}$ = amount shipped from source $i$ to destination $j$.
+- Example: $x_{i,j,t}$ = amount shipped from source $i$ to destination $j$ during time period $t$.
+
+As we add more dimensions such as products, locations, technologies, or time periods, the number of decision variables can grow surprisingly quickly. For example, consider the case where we have 3 sources, 12 destinations, and a planning horizon of 60 days. This means the model contains 2,160 distinct decisions, one for every possible combination of $i$, $j$, and $t$. This is one of the reasons why advanced optimization solvers such as Gurobi and CPLEX are important.
+
+## 3.2 Coefficients(parameters)
+
+Coefficients are the known constants that appear in the objective function and constraints. They describe how decision variables contribute to the objective and how they consume resources.
+
+- In the objective function, coefficients typically represent quantities such as profit and cost. They are often denoted by $c_i$. For example, if producing one unit of product $i$ generates \$10 profit, then $c_i = 10$.
+
+- In the constraints, coefficients represent the amount of a resource consumed or produced by a decision. For example, if producing one unit of product $i$ requires 2 hours of labor, then the corresponding coefficient in the labor constraint is 2.
+
+A key assumption in linear programming is that these coefficients are known with certainty. In practice, however, they may change due to uncertainty or changing conditions. The impact of changes in the coefficients can be studied using **sensitivity analysis**, which will be discussed later.
+
+## 3.3 Objective Function
+
+The objective function describes what we want to optimize.
+
+In a typical introductory linear programming problem, we optimize a single objective. If there are multiple objectives that we would like to optimize simultaneously, we might turn to goal programming, which can be viewed as an extension of linear programming designed to handle multiple objectives.
+
+In a standard linear programming model, the objective is either maximization or minimization. For example:
+
+- **Maximize** something desirable, such as profit, revenue, production output, or customer satisfaction points.
+- **Minimize** something undesirable, such as cost, emissions, waste, or transportation distance.
+
+### Examples of Linear Objective Functions
+
+A linear objective function can take many forms depending on how the decision variables and coefficients are defined.
+
+**Single-index decision variables**:
+
+$$
+\max z = \sum_{i=1}^{n} p_i x_i
+$$
+
+where $p_i$ is the profit generated by one unit of product $i$.
+
+**Transportation problem**:
+
+$$
+\min z = \sum_{i=1}^{m}\sum_{j=1}^{n} c_{ij}x_{ij}
+$$
+
+where $c_{ij}$ is the cost of shipping one unit from source $i$ to destination $j$.
+
+**Multi-period planning problem**:
+
+$$
+\min z = \sum_{i=1}^{m}\sum_{j=1}^{n}\sum_{t=1}^{T} c_{ijt}x_{ijt}
+$$
+
+where $c_{ijt}$ is the cost associated with decision $x_{ijt}$ during time period $t$.
+
+Notice that all of these objective functions follow the same basic structure: coefficient × decision variable, summed over all possible decisions.
+
+### Objective Function in Mathematical Form
+
+A linear objective function can also be written compactly as: 
+
+$$\max z = c^T x
+\qquad \text{or} \qquad
+\min z = c^T x$$
+
+Here, $c^T x$ denotes the dot product between the known coefficients and unknown decision variables. Even when decision variables contain multiple indices, such as $x_{ij}$ or $x_{ijt}$, we can rearrange (or "flatten") them into a single vector. The corresponding coefficients are also stacked in the same order into a single vector. 
+
+$$c =
+\begin{bmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_n
+\end{bmatrix}
+\in \mathbb{R}^n,
+\qquad
+x =
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
+\in \mathbb{R}^n.$$
+
+Performing the dot product gives us:
+
+$$c^T x
+=
+c_1x_1 + c_2x_2 + \cdots + c_nx_n,$$
+
+which is exactly the linear objective function shown above.
+
+
+## 3.4 Constraints
+Constraints represent limitations on our decisions. They define what solutions are feasible and what solutions are not. In a linear programming model, constraints are typically written using the relationships $\leq$, $\geq$, or $=$.
+
+Constraints can involve continuous, integer, or binary decision variables. If all decision variables are required to take integer values, the problem becomes an Integer Programming (IP) problem. If some decision variables are integer while others are continuous, the problem becomes a Mixed Integer Programming (MIP) problem.
+
+## Examples of Constraints
+Some common examples include:
+
+- **Capacity constraints:** A factory may not be able to produce more than 100 units, so we write $x_1 + x_2 \leq 100$.
+- **Demand constraints:** A customer may require at least 50 units of product, so we write $x_1 + x_2 \geq 50$.
+- **Balance constraints:** Material entering a process must equal material leaving the process, so we write $x_1 + x_2 = 75$.
+- **Non-negativity constraints:** Production quantities cannot be negative, so we write $x_i \geq 0$.
+
+Constraints can involve continuous, integer, or binary decision variables.
+
+- If all decision variables are required to take integer values, the problem becomes an **Integer Programming (IP)** problem.
+- If some decision variables are integer while others are continuous, the problem becomes a **Mixed Integer Programming (MIP)** problem.
+
+
+## Constraints in Mathematical Form
+
+A linear constraint can generally be written as
+
+$$
+a_1x_1 + a_2x_2 + \cdots + a_nx_n \leq b,
+$$
+
+or
+
+$$
+a_1x_1 + a_2x_2 + \cdots + a_nx_n \geq b,
+$$
+
+or
+
+$$
+a_1x_1 + a_2x_2 + \cdots + a_nx_n = b,
+$$
+
+where the coefficients $a_i$ and the right-hand-side value $b$ are known constants.
+
+When multiple constraints are present, they can be written compactly in matrix form as
+
+$$
+Ax \leq b,
+$$
+
+$$
+Ax \geq b,
+$$
+
+or
+
+$$
+Ax = b.
+$$
+
+Here:
+
+- $A$ is an $(m \times n)$ matrix of coefficients.
+- $x$ is an $(n \times 1)$ vector of decision variables.
+- $b$ is an $(m \times 1)$ vector of constants.
+
+Together, the objective function and constraints form a complete linear programming model.
+
+
+
+# Standard Form
+
+Many optimization algorithms were originally developed using a standard mathematical representation.
+
+The standard form is
+
+$$Ax=b$$
+
+subject to
+
+$$x \ge 0$$
+
+where
+
+$$A \in \mathbb{R}^{m \times n}$$
+
+$$x \in \mathbb{R}^{n \times 1}$$
+
+$$b \in \mathbb{R}^{m \times 1}$$
+
+and
+
+- $A$ is the coefficient matrix.
+- $x$ is the vector of decision variables.
+- $b$ is the vector of constants.
+
+This compact matrix notation allows us to represent very large optimization problems.
+
+## Contraint in Mathematical Form
+
+Recall the standard form:
+
+$$Ax=b$$
+
+where
+
+$$A=
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix}
+\qquad (m \times n)$$
+
+$$x=
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
+\qquad (n \times 1)$$
+
+$$b=
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_m
+\end{bmatrix}
+\qquad (m \times 1)$$
+
+Therefore,
+
+$$\underbrace{
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix}
+}_{m \times n}
+\underbrace{
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
+}_{n \times 1}
+=
+\underbrace{
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_m
+\end{bmatrix}
+}_{m \times 1}$$
+
+Notice that the inner dimensions match:
+
+$$(m \times n)(n \times 1)
+=
+(m \times 1)$$
+
+which is why the matrix multiplication is valid.
+
+
+4. Standard Form 
+
+# Why Convert to Standard Form?
+
+Historically, algorithms such as the Simplex Method were developed assuming problems were written in standard form.
+
+Modern solvers such as:
+
+- Excel Solver
+- Gurobi
+- CPLEX
+
+allow users to directly enter inequalities such as
+
+$$Ax \le b$$
+
+or
+
+$$Ax \ge b$$
+
+However, internally many algorithms still transform the problem into an equivalent standard form.
+
+# Slack Variables
+
+Suppose we have
+
+$$2x+y \le 10$$
+
+There may be unused capacity.
+
+We introduce a nonnegative slack variable (s):
+
+$$2x+y+s=10$$
+
+where
+
+$$s \ge 0$$
+
+The slack variable measures the unused resource.
+
+# Surplus Variables
+
+Suppose we have
+
+$$2x+y \ge 10$$
+
+We introduce a surplus variable (s):
+
+$$2x+y-s=10$$
+
+where
+
+$$s \ge 0$$
+
+The surplus variable measures how much we exceed the minimum requirement.
+
