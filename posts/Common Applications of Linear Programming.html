@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nicole Zhou">
+<meta name="dcterms.date" content="2026-06-23">
+
+<title>What Is Linear Programming Used For? Common Applications and Examples （1） – An Absolute Beginner’s Guide to Optimization</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2a4f2bfc591cd5498fe57ca28617a45d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">An Absolute Beginner’s Guide to Optimization</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#common-linear-programming-problem-types" id="toc-common-linear-programming-problem-types" class="nav-link active" data-scroll-target="#common-linear-programming-problem-types">Common Linear Programming Problem Types</a></li>
+  <li><a href="#product-mix" id="toc-product-mix" class="nav-link" data-scroll-target="#product-mix">1. Product mix</a>
+  <ul class="collapse">
+  <li><a href="#production-planning" id="toc-production-planning" class="nav-link" data-scroll-target="#production-planning">Production Planning</a></li>
+  <li><a href="#example-of-a-make-or-buy-question" id="toc-example-of-a-make-or-buy-question" class="nav-link" data-scroll-target="#example-of-a-make-or-buy-question">1.1 Example of a Make or Buy Question</a></li>
+  <li><a href="#lp-formulation" id="toc-lp-formulation" class="nav-link" data-scroll-target="#lp-formulation">1.2 LP formulation</a>
+  <ul class="collapse">
+  <li><a href="#sets" id="toc-sets" class="nav-link" data-scroll-target="#sets">Sets</a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#decision-variables" id="toc-decision-variables" class="nav-link" data-scroll-target="#decision-variables">Decision Variables</a></li>
+  <li><a href="#objective-function" id="toc-objective-function" class="nav-link" data-scroll-target="#objective-function">Objective Function</a></li>
+  <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints">Constraints</a></li>
+  <li><a href="#equivalent-formulation-without-sets-and-indices" id="toc-equivalent-formulation-without-sets-and-indices" class="nav-link" data-scroll-target="#equivalent-formulation-without-sets-and-indices">Equivalent Formulation Without Sets and Indices</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#blendingmixing-problem" id="toc-blendingmixing-problem" class="nav-link" data-scroll-target="#blendingmixing-problem">2. Blending(Mixing) Problem</a>
+  <ul class="collapse">
+  <li><a href="#the-defining-characteristic-mass-balance" id="toc-the-defining-characteristic-mass-balance" class="nav-link" data-scroll-target="#the-defining-characteristic-mass-balance">The Defining Characteristic: Mass Balance</a></li>
+  <li><a href="#the-second-characteristic-quality-attributes" id="toc-the-second-characteristic-quality-attributes" class="nav-link" data-scroll-target="#the-second-characteristic-quality-attributes">The Second Characteristic: Quality Attributes</a></li>
+  <li><a href="#side-by-side-contrast" id="toc-side-by-side-contrast" class="nav-link" data-scroll-target="#side-by-side-contrast">Side-by-Side Contrast</a></li>
+  <li><a href="#example-of-a-petroleum-blending-problem" id="toc-example-of-a-petroleum-blending-problem" class="nav-link" data-scroll-target="#example-of-a-petroleum-blending-problem">2.1 Example of a Petroleum Blending Problem</a>
+  <ul class="collapse">
+  <li><a href="#lp-formulation-1" id="toc-lp-formulation-1" class="nav-link" data-scroll-target="#lp-formulation-1">2.2 LP formulation</a></li>
+  <li><a href="#sets-1" id="toc-sets-1" class="nav-link" data-scroll-target="#sets-1">Sets</a></li>
+  <li><a href="#parameters-1" id="toc-parameters-1" class="nav-link" data-scroll-target="#parameters-1">Parameters</a></li>
+  <li><a href="#decision-variables-1" id="toc-decision-variables-1" class="nav-link" data-scroll-target="#decision-variables-1">Decision Variables</a></li>
+  <li><a href="#objective-function-1" id="toc-objective-function-1" class="nav-link" data-scroll-target="#objective-function-1">Objective Function</a></li>
+  <li><a href="#constraints-1" id="toc-constraints-1" class="nav-link" data-scroll-target="#constraints-1">Constraints</a></li>
+  <li><a href="#equivalent-formulation-without-sets-and-indices-1" id="toc-equivalent-formulation-without-sets-and-indices-1" class="nav-link" data-scroll-target="#equivalent-formulation-without-sets-and-indices-1">Equivalent Formulation Without Sets and Indices</a></li>
+  <li><a href="#decision-variables-2" id="toc-decision-variables-2" class="nav-link" data-scroll-target="#decision-variables-2">Decision Variables</a></li>
+  <li><a href="#objective-function-2" id="toc-objective-function-2" class="nav-link" data-scroll-target="#objective-function-2">Objective Function</a></li>
+  <li><a href="#constraints-2" id="toc-constraints-2" class="nav-link" data-scroll-target="#constraints-2">Constraints</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">What Is Linear Programming Used For? Common Applications and Examples （1）</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Optimization</div>
+    <div class="quarto-category">Linear Programming</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nicole Zhou </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 23, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="common-linear-programming-problem-types" class="level1">
+<h1>Common Linear Programming Problem Types</h1>
+<table class="caption-top table">
+<caption>Common LP problem categories</caption>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 35%">
+<col style="width: 20%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Decision Question</th>
+<th>Typical Decision Variables</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Production Planning</strong></td>
+<td>How much should I produce, purchase, or transport?</td>
+<td>Quantity to produce, buy, or ship</td>
+<td>Make-or-buy decisions, production planning, capacity allocation, workforce planning</td>
+</tr>
+<tr class="even">
+<td><strong>Blending (Mixing)</strong></td>
+<td>What proportions of different ingredients should be combined to meet quality requirements at minimum cost?</td>
+<td>Amount or percentage of each ingredient in the final mixture</td>
+<td>Diet problem, gasoline blending, alloy design, animal feed formulation, fertilizer mixing</td>
+</tr>
+<tr class="odd">
+<td><strong>Network Problems</strong></td>
+<td>How should flow move through a network to optimize an objective while satisfying network constraints?</td>
+<td>Flow on each arc (road, pipe, transmission line, etc.)</td>
+<td>Shortest path, maximum flow, minimum-cost flow, transshipment, assignment</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="product-mix" class="level1">
+<h1>1. Product mix</h1>
+<section id="production-planning" class="level3">
+<h3 class="anchored" data-anchor-id="production-planning">Production Planning</h3>
+<p>Product mix determines <strong>how much</strong> of each product to produce or purchase in order to optimize an objective such as minimizing cost or maximizing profit. Decision variables typically represent quantities, while the model is constrained by factors such as production capacity, resource availability, demand, or budget.</p>
+</section>
+<section id="example-of-a-make-or-buy-question" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-a-make-or-buy-question">1.1 Example of a Make or Buy Question</h2>
+<p>A steel manufacturer plans to transition part of its production to hydrogen-based Direct Reduced Iron (DRI) technology and requires 12,000 kg of hydrogen per day. The company already operates hydrogen production facilities and has established supply contracts with external vendors. The decision is therefore limited to determining the quantity of each hydrogen type to produce internally and purchase externally.</p>
+<p>Three hydrogen pathways are available: green hydrogen, blue hydrogen, and grey hydrogen. The cost of producing hydrogen internally is $5.00/kg for green hydrogen, $3.50/kg for blue hydrogen, and $2.00/kg for grey hydrogen. Alternatively, hydrogen can be purchased from external suppliers at $5.50/kg, $4.00/kg, and $2.50/kg, respectively. The carbon intensities of green, blue, and grey hydrogen are 0.5, 3.0, and 9.0 kg CO₂ per kg H₂, respectively.</p>
+<p>To support the company’s decarbonization goals, at least 10% of total hydrogen demand must be supplied by green hydrogen. Furthermore, the average carbon intensity of the hydrogen portfolio must not exceed 3.5 kg CO₂ per kg H₂. The company’s internal production facilities can supply at most 6,000 kg of hydrogen per day. External suppliers can provide at most 8,000 kg per day in total. In addition, supplier contracts limit purchases of green, blue, and grey hydrogen to 2,000 kg, 4,000 kg, and 5,000 kg per day, respectively.</p>
+<p>Formulate a linear programming model to determine how much green, blue, and grey hydrogen should be produced internally and how much should be purchased externally in order to minimize total daily hydrogen procurement cost while satisfying all demand, environmental, production, and supply constraints.</p>
+</section>
+<section id="lp-formulation" class="level2">
+<h2 class="anchored" data-anchor-id="lp-formulation">1.2 LP formulation</h2>
+<section id="sets" class="level3">
+<h3 class="anchored" data-anchor-id="sets">Sets</h3>
+<p>Let</p>
+<p><span class="math display">\[
+H=\{G,B,R\}
+\]</span></p>
+<p>denote the set of hydrogen types, where: <span class="math inline">\(G\)</span> = Green Hydrogen, <span class="math inline">\(B\)</span> = Blue Hydrogen, <span class="math inline">\(R\)</span> = Grey Hydrogen</p>
+<p>and</p>
+<p><span class="math display">\[
+S=\{M,P\}
+\]</span></p>
+<p>denote the set of sourcing options, where <span class="math inline">\(M\)</span> = Internal Production (Make) and <span class="math inline">\(P\)</span> = External Procurement (Buy)</p>
+</section>
+<section id="parameters" class="level3">
+<h3 class="anchored" data-anchor-id="parameters">Parameters</h3>
+<p>The following parameters are known:</p>
+<ul>
+<li><span class="math inline">\(D=12000\)</span>: daily hydrogen demand (kg/day)</li>
+<li><span class="math inline">\(c_{i,s}\)</span>: cost of obtaining one kilogram of hydrogen type <span class="math inline">\(i\)</span> through source <span class="math inline">\(s\)</span></li>
+<li><span class="math inline">\(e_i\)</span>: carbon intensity (kg CO<span class="math inline">\(_2\)</span>/kg H<span class="math inline">\(_2\)</span>) of hydrogen type <span class="math inline">\(i\)</span></li>
+</ul>
+<p>The cost coefficients are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Hydrogen Type</th>
+<th>Internal Production (<span class="math inline">\(M\)</span>)</th>
+<th>External Purchase (<span class="math inline">\(P\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Green (<span class="math inline">\(G\)</span>)</td>
+<td>$5.00/kg</td>
+<td>$5.50/kg</td>
+</tr>
+<tr class="even">
+<td>Blue (<span class="math inline">\(B\)</span>)</td>
+<td>$3.50/kg</td>
+<td>$4.00/kg</td>
+</tr>
+<tr class="odd">
+<td>Grey (<span class="math inline">\(R\)</span>)</td>
+<td>$2.00/kg</td>
+<td>$2.50/kg</td>
+</tr>
+</tbody>
+</table>
+<p>The carbon intensity coefficients (<span class="math inline">\(e_i\)</span>)are:</p>
+<p><span class="math display">\[
+e_G=0.5,\qquad
+e_B=3.0,\qquad
+e_R=9.0.
+\]</span></p>
+</section>
+<section id="decision-variables" class="level3">
+<h3 class="anchored" data-anchor-id="decision-variables">Decision Variables</h3>
+<p>Let</p>
+<p><span class="math display">\[
+x_{i,s}
+=
+\text{kg of hydrogen type } i
+\text{ obtained through source } s
+\qquad
+i\in H,\; s\in S.
+\]</span></p>
+</section>
+<section id="objective-function" class="level3">
+<h3 class="anchored" data-anchor-id="objective-function">Objective Function</h3>
+<p>Minimize total daily hydrogen procurement cost:</p>
+<p><span class="math display">\[
+\min Z
+=
+\sum_{i\in H}
+\sum_{s\in S}
+c_{i,s}x_{i,s}
+\]</span></p>
+</section>
+<section id="constraints" class="level3">
+<h3 class="anchored" data-anchor-id="constraints">Constraints</h3>
+<p><strong>Hydrogen demand must be satisfied</strong></p>
+<p><span class="math display">\[
+\sum_{i\in H}
+\sum_{s\in S}
+x_{i,s}
+=
+D
+\]</span></p>
+<p><strong>Internal production capacity</strong></p>
+<p><span class="math display">\[
+\sum_{i\in H}
+x_{i,M}
+\leq
+6000
+\]</span></p>
+<p><strong>External supplier capacity</strong></p>
+<p><span class="math display">\[
+\sum_{i\in H}
+x_{i,P}
+\leq
+8000
+\]</span></p>
+<p><strong>At least 10% of total hydrogen must be green hydrogen</strong></p>
+<p><span class="math display">\[
+\sum_{s\in S}
+x_{G,s}
+\geq
+0.10D
+\]</span></p>
+<p><strong>Average carbon intensity must not exceed 3.5 kg CO<span class="math inline">\(_2\)</span>/kg H<span class="math inline">\(_2\)</span></strong></p>
+<p><span class="math display">\[
+\sum_{i\in H}
+e_i
+\left(
+\sum_{s\in S}
+x_{i,s}
+\right)
+\leq
+3.5D
+\]</span></p>
+<p><strong>Supplier contract limits</strong></p>
+<p><span class="math display">\[
+x_{G,P}
+\leq
+2000
+\]</span></p>
+<p><span class="math display">\[
+x_{B,P}
+\leq
+4000
+\]</span></p>
+<p><span class="math display">\[
+x_{R,P}
+\leq
+5000
+\]</span></p>
+<p><strong>Non-negativity</strong></p>
+<p><span class="math display">\[
+x_{i,s}
+\geq
+0,
+\qquad
+\forall i\in H,\; s\in S
+\]</span></p>
+</section>
+<section id="equivalent-formulation-without-sets-and-indices" class="level3">
+<h3 class="anchored" data-anchor-id="equivalent-formulation-without-sets-and-indices">Equivalent Formulation Without Sets and Indices</h3>
+<p>The same model can be written by explicitly listing every decision variable. Let</p>
+<ul>
+<li><span class="math inline">\(x_{G,M}\)</span> = green hydrogen produced internally</li>
+<li><span class="math inline">\(x_{G,P}\)</span> = green hydrogen purchased externally</li>
+<li><span class="math inline">\(x_{B,M}\)</span> = blue hydrogen produced internally</li>
+<li><span class="math inline">\(x_{B,P}\)</span> = blue hydrogen purchased externally</li>
+<li><span class="math inline">\(x_{R,M}\)</span> = grey hydrogen produced internally</li>
+<li><span class="math inline">\(x_{R,P}\)</span> = grey hydrogen purchased externally</li>
+</ul>
+<p>The objective function becomes</p>
+<p><span class="math display">\[
+\min Z =
+5x_{G,M}
++3.5x_{B,M}
++2x_{R,M}
++5.5x_{G,P}
++4x_{B,P}
++2.5x_{R,P}
+\]</span></p>
+<p>subject to</p>
+<p><strong>Hydrogen demand must be satisfied</strong></p>
+<p><span class="math display">\[
+x_{G,M}+x_{G,P}
++x_{B,M}+x_{B,P}
++x_{R,M}+x_{R,P}
+=
+12000
+\]</span></p>
+<p><strong>Internal production capacity</strong></p>
+<p><span class="math display">\[
+x_{G,M}
++x_{B,M}
++x_{R,M}
+\leq
+6000
+\]</span></p>
+<p><strong>External supplier capacity</strong></p>
+<p><span class="math display">\[
+x_{G,P}
++x_{B,P}
++x_{R,P}
+\leq
+8000
+\]</span></p>
+<p><strong>At least 10% of total hydrogen must be green hydrogen</strong></p>
+<p><span class="math display">\[
+x_{G,M}
++x_{G,P}
+\geq
+1200
+\]</span></p>
+<p><strong>Average carbon intensity must not exceed 3.5 kg CO<span class="math inline">\(_2\)</span>/kg H<span class="math inline">\(_2\)</span></strong></p>
+<p><span class="math display">\[
+0.5(x_{G,M}+x_{G,P})
++
+3(x_{B,M}+x_{B,P})
++
+9(x_{R,M}+x_{R,P})
+\leq
+42000
+\]</span></p>
+<p><strong>Supplier contract limits</strong></p>
+<p><span class="math display">\[
+x_{G,P}\leq 2000
+\]</span></p>
+<p><span class="math display">\[
+x_{B,P}\leq 4000
+\]</span></p>
+<p><span class="math display">\[
+x_{R,P}\leq 5000
+\]</span></p>
+<p><strong>Non-negativity</strong></p>
+<p><span class="math display">\[
+x_{G,M},x_{G,P},
+x_{B,M},x_{B,P},
+x_{R,M},x_{R,P}
+\geq 0
+\]</span></p>
+<p>Both formulations are mathematically identical. In this example there are only 6 decision variables, so writing them out individually is manageable. We can also use indexed formulation which scales naturally to larger problems.</p>
+<p>The choice of notation is also flexible. We might define <span class="math inline">\(M_i\)</span> and <span class="math inline">\(B_i\)</span> to represent the quantities made and purchased. Some models may use superscripts, such as <span class="math inline">\(c_i^M\)</span> and <span class="math inline">\(c_i^P\)</span>. These formulations are mathematically equivalent; the choice of notation is largely a matter of clarity, convenience, and the complexity of the problem being modeled.</p>
+</section>
+</section>
+</section>
+<section id="blendingmixing-problem" class="level1">
+<h1>2. Blending(Mixing) Problem</h1>
+<p>A production planning model treats each <strong>finished</strong> product as a single decision variable. It asks: <em>“How many units of each product should we make?”</em> The model does not care what is inside the product. It only tracks whether you have enough resources (e.g.,labor hours, machine time, raw materials, or budget) to produce it.</p>
+<p>A blending problem goes one level deeper. It asks: <em>“What should be <strong>inside</strong> the product, and <strong>in what proportions</strong>?”</em></p>
+<p>Consider you have a <strong>secret party beverage menu</strong> where you blend beer, syrup, water, and sugar to produce several drinks. The production planning model would simply say: <em>“Make 50 cups of Drink A and 30 cups of Drink B.”</em> The blending model asks: <em>“For each cup of Drink A, how much beer, syrup, water, and sugar goes in — and does the resulting mixture meet the alcohol and sweetness targets?”</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/drink.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>One of my friend’s specialty drink: plum drink made of plum juice, red wine, sparkling water, and some other magical ingredients.</figcaption>
+</figure>
+</div>
+<section id="the-defining-characteristic-mass-balance" class="level2">
+<h2 class="anchored" data-anchor-id="the-defining-characteristic-mass-balance">The Defining Characteristic: Mass Balance</h2>
+<p>The heart of every blending problem is the <strong>mass balance principle</strong>. In a classical mixing problem:</p>
+<p><span class="math display">\[\text{Total ingredients in} = \text{Total blended product out}\]</span></p>
+<p>Every unit of every ingredient needs to be accounted for. Nothing appears from nowhere; nothing disappears. If you pour 200 liters of beer, 50 liters of syrup, and 150 liters of water into a vat, you get exactly 400 liters of blended drink.</p>
+<p>This gives rise to the fundamental blending constraint:</p>
+<p><span class="math display">\[\sum_{i} x_{ij} = q_j \quad \forall j\]</span></p>
+<p>where <span class="math inline">\(x_{ij}\)</span> is the quantity of ingredient <span class="math inline">\(i\)</span> used in product <span class="math inline">\(j\)</span>, and <span class="math inline">\(q_j\)</span> is the total quantity of product <span class="math inline">\(j\)</span> produced.</p>
+<p>But in practice, ingredients usually evaporate, spill, shrink, or get consumed in chemical reactions during processing. The mass balance still holds but it simply expands to include losses as an explicit term:</p>
+<p><span class="math display">\[\text{Total ingredients in} = \text{Total blended product out} + \text{Losses}\]</span></p>
+<p>In LP terms, a <strong>yield factor</strong> <span class="math inline">\(\lambda_i \in (0, 1]\)</span> captures how much of ingredient <span class="math inline">\(i\)</span> actually makes it into the final product. The blending constraint becomes:</p>
+<p><span class="math display">\[\sum_{i} \lambda_i \, x_{ij} = q_j \quad \forall j\]</span></p>
+<p>When <span class="math inline">\(\lambda_i = 1\)</span>, the ingredient transfers perfectly with no loss. When <span class="math inline">\(\lambda_i = 0.95\)</span>, 5% evaporates during mixing and only 95% of what you pour in ends up in the final blend.</p>
+</section>
+<section id="the-second-characteristic-quality-attributes" class="level2">
+<h2 class="anchored" data-anchor-id="the-second-characteristic-quality-attributes">The Second Characteristic: Quality Attributes</h2>
+<p>Beyond mass balance, each ingredient carries one or more <strong>quality attributes</strong> that propagate into the final mixture:</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Quality attributes across blending domains</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Ingredients</th>
+<th>Quality Attribute</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Fuel refining</strong></td>
+<td>Crude streams</td>
+<td>Octane rating, sulfur content</td>
+</tr>
+<tr class="even">
+<td><strong>Beverages</strong></td>
+<td>Beer, syrup, water, sugar</td>
+<td>Alcohol %, sweetness, calories</td>
+</tr>
+<tr class="odd">
+<td><strong>Animal feed</strong></td>
+<td>Corn, soy, wheat, minerals</td>
+<td>Protein %, fat %, fiber %</td>
+</tr>
+<tr class="even">
+<td><strong>Steel production</strong></td>
+<td>Scrap grades, alloys</td>
+<td>Carbon %, tensile strength</td>
+</tr>
+<tr class="odd">
+<td><strong>Paint mixing</strong></td>
+<td>Pigments, solvents, binders</td>
+<td>Color, viscosity, drying time</td>
+</tr>
+<tr class="even">
+<td><strong>Food processing</strong></td>
+<td>Oils, fats, additives</td>
+<td>Saturated fat %, flavor index</td>
+</tr>
+</tbody>
+</table>
+<p>Quality blends <strong>proportionally</strong> — a critical assumption. If Ingredient A has 8% alcohol and Ingredient B has 0% alcohol, a 50/50 blend yields exactly 4% alcohol. This linear mixing rule is what keeps the blending problem tractable as a <strong>linear program</strong>.</p>
+<p>The quality constraint for a minimum threshold <span class="math inline">\(\theta\)</span> on attribute <span class="math inline">\(\alpha\)</span> takes the form:</p>
+<p><span class="math display">\[\frac{\sum_{i} \alpha_i \, x_{ij}}{q_j} \geq \theta_j \quad \forall j\]</span></p>
+<p>or equivalently in <strong>linearised form</strong>:</p>
+<p><span class="math display">\[\sum_{i} \alpha_i \, x_{ij} \geq \theta_j \cdot q_j \quad \forall j\]</span></p>
+</section>
+<section id="side-by-side-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="side-by-side-contrast">Side-by-Side Contrast</h2>
+<table class="table-striped table-hover caption-top table">
+<caption>Structural comparison</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Production Planning</th>
+<th>Blending</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Decision variable</strong></td>
+<td>Units of finished product</td>
+<td>Quantity of each ingredient per product</td>
+</tr>
+<tr class="even">
+<td><strong>Product composition</strong></td>
+<td>Not tracked</td>
+<td>Explicitly modeled</td>
+</tr>
+<tr class="odd">
+<td><strong>Core constraint</strong></td>
+<td>Resource capacity</td>
+<td>Mass balance + quality targets</td>
+</tr>
+<tr class="even">
+<td><strong>Resource focus</strong></td>
+<td>Labor, machines, budget</td>
+<td>Ingredient availability</td>
+</tr>
+<tr class="odd">
+<td><strong>Quality tracking</strong></td>
+<td>None</td>
+<td>Octane, alcohol, sweetness, etc.</td>
+</tr>
+<tr class="even">
+<td><strong>Math structure</strong></td>
+<td><span class="math inline">\(\sum_j a_{ij} x_j \leq b_i\)</span></td>
+<td><span class="math inline">\(\sum_i x_{ij} = q_j\)</span> and <span class="math inline">\(\sum_i \alpha_i x_{ij} \geq \theta \cdot q_j\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-of-a-petroleum-blending-problem" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-a-petroleum-blending-problem">2.1 Example of a Petroleum Blending Problem</h2>
+<p>A petroleum refinery produces three grades of gasoline: <strong>Regular</strong>, <strong>Mid-grade</strong>, and <strong>Premium</strong>. Each gasoline grade is created by blending three available components:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th style="text-align: right;">Available (L/day)</th>
+<th style="text-align: right;">Cost ($/L)</th>
+<th style="text-align: right;">Octane Rating</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reformate</td>
+<td style="text-align: right;">4,000</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">98</td>
+</tr>
+<tr class="even">
+<td>Alkylate</td>
+<td style="text-align: right;">3,000</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">102</td>
+</tr>
+<tr class="odd">
+<td>Straight-run Gasoline</td>
+<td style="text-align: right;">6,000</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">84</td>
+</tr>
+</tbody>
+</table>
+<p>Each gasoline grade has a different selling price and minimum octane requirement.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Product</th>
+<th style="text-align: right;">Selling Price ($/L)</th>
+<th style="text-align: right;">Minimum Octane</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Regular</td>
+<td style="text-align: right;">1.20</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr class="even">
+<td>Mid-grade</td>
+<td style="text-align: right;">1.35</td>
+<td style="text-align: right;">91</td>
+</tr>
+<tr class="odd">
+<td>Premium</td>
+<td style="text-align: right;">1.55</td>
+<td style="text-align: right;">95</td>
+</tr>
+</tbody>
+</table>
+<p>Assume that the daily market demand is at most:</p>
+<ul>
+<li>Regular: <strong>6,000 L</strong></li>
+<li>Mid-grade: <strong>4,000 L</strong></li>
+<li>Premium: <strong>3,000 L</strong></li>
+</ul>
+<p>How many liters of each gasoline grade should the refinery produce, and how should each blending component be allocated among the three products, in order to <strong>maximize daily profit</strong>?</p>
+<p>Hint: The solution must satisfy the following constraints:</p>
+<section id="lp-formulation-1" class="level3">
+<h3 class="anchored" data-anchor-id="lp-formulation-1">2.2 LP formulation</h3>
+</section>
+<section id="sets-1" class="level3">
+<h3 class="anchored" data-anchor-id="sets-1">Sets</h3>
+<p><span class="math display">\[
+I = \{\text{Reformate}, \text{Alkylate}, \text{Straight-run Gasoline}\}
+\]</span></p>
+<p><span class="math display">\[
+J = \{\text{Regular}, \text{Mid-grade}, \text{Premium}\}
+\]</span></p>
+</section>
+<section id="parameters-1" class="level3">
+<h3 class="anchored" data-anchor-id="parameters-1">Parameters</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(a_i\)</span></td>
+<td>Available supply of component <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(c_i\)</span></td>
+<td>Cost per liter of component <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(o_i\)</span></td>
+<td>Octane rating of component <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(p_j\)</span></td>
+<td>Selling price per liter of product <span class="math inline">\(j\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(r_j\)</span></td>
+<td>Minimum octane requirement of product <span class="math inline">\(j\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(d_j\)</span></td>
+<td>Maximum market demand for product <span class="math inline">\(j\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="decision-variables-1" class="level3">
+<h3 class="anchored" data-anchor-id="decision-variables-1">Decision Variables</h3>
+<p><span class="math display">\[
+x_{ij} = \text{liters of component } i \text{ blended into product } j
+\]</span></p>
+<p>where <span class="math inline">\(i \in I\)</span> and <span class="math inline">\(j \in J\)</span>.</p>
+</section>
+<section id="objective-function-1" class="level3">
+<h3 class="anchored" data-anchor-id="objective-function-1">Objective Function</h3>
+<p><span class="math display">\[
+\max Z =
+\sum_{j \in J} p_j \left(\sum_{i \in I} x_{ij}\right)
+-
+\sum_{i \in I}\sum_{j \in J} c_i x_{ij}
+\]</span></p>
+</section>
+<section id="constraints-1" class="level3">
+<h3 class="anchored" data-anchor-id="constraints-1">Constraints</h3>
+<p>Component availability:</p>
+<p><span class="math display">\[
+\sum_{j \in J} x_{ij} \le a_i
+\quad \forall i \in I
+\]</span></p>
+<p>Market demand:</p>
+<p><span class="math display">\[
+\sum_{i \in I} x_{ij} \le d_j
+\quad \forall j \in J
+\]</span></p>
+<p>Octane requirement:</p>
+<p><span class="math display">\[
+\sum_{i \in I} o_i x_{ij}
+\ge
+r_j \sum_{i \in I} x_{ij}
+\quad \forall j \in J
+\]</span></p>
+<p>Non-negativity:</p>
+<p><span class="math display">\[
+x_{ij} \ge 0
+\quad \forall i \in I,\ j \in J
+\]</span></p>
+</section>
+<section id="equivalent-formulation-without-sets-and-indices-1" class="level3">
+<h3 class="anchored" data-anchor-id="equivalent-formulation-without-sets-and-indices-1">Equivalent Formulation Without Sets and Indices</h3>
+</section>
+<section id="decision-variables-2" class="level3">
+<h3 class="anchored" data-anchor-id="decision-variables-2">Decision Variables</h3>
+<p>Let</p>
+<ul>
+<li><p><span class="math inline">\(R_R\)</span> = liters of Reformate blended into Regular</p></li>
+<li><p><span class="math inline">\(A_R\)</span> = liters of Alkylate blended into Regular</p></li>
+<li><p><span class="math inline">\(S_R\)</span> = liters of Straight-run Gasoline blended into Regular</p></li>
+<li><p><span class="math inline">\(R_M\)</span> = liters of Reformate blended into Mid-grade</p></li>
+<li><p><span class="math inline">\(A_M\)</span> = liters of Alkylate blended into Mid-grade</p></li>
+<li><p><span class="math inline">\(S_M\)</span> = liters of Straight-run Gasoline blended into Mid-grade</p></li>
+<li><p><span class="math inline">\(R_P\)</span> = liters of Reformate blended into Premium</p></li>
+<li><p><span class="math inline">\(A_P\)</span> = liters of Alkylate blended into Premium</p></li>
+<li><p><span class="math inline">\(S_P\)</span> = liters of Straight-run Gasoline blended into Premium</p></li>
+</ul>
+</section>
+<section id="objective-function-2" class="level3">
+<h3 class="anchored" data-anchor-id="objective-function-2">Objective Function</h3>
+<p>Maximize daily profit.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\max Z =\;&amp;
+1.20(R_R+A_R+S_R) \\
+&amp;+1.35(R_M+A_M+S_M) \\
+&amp;+1.55(R_P+A_P+S_P) \\
+&amp;-0.95(R_R+R_M+R_P) \\
+&amp;-1.10(A_R+A_M+A_P) \\
+&amp;-0.75(S_R+S_M+S_P)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="constraints-2" class="level3">
+<h3 class="anchored" data-anchor-id="constraints-2">Constraints</h3>
+<section id="component-availability" class="level4">
+<h4 class="anchored" data-anchor-id="component-availability">Component Availability</h4>
+<p><span class="math display">\[
+R_R+R_M+R_P \le 4000
+\]</span></p>
+<p><span class="math display">\[
+A_R+A_M+A_P \le 3000
+\]</span></p>
+<p><span class="math display">\[
+S_R+S_M+S_P \le 6000
+\]</span></p>
+</section>
+<section id="market-demand" class="level4">
+<h4 class="anchored" data-anchor-id="market-demand">Market Demand</h4>
+<p><span class="math display">\[
+R_R+A_R+S_R \le 6000
+\]</span></p>
+<p><span class="math display">\[
+R_M+A_M+S_M \le 4000
+\]</span></p>
+<p><span class="math display">\[
+R_P+A_P+S_P \le 3000
+\]</span></p>
+</section>
+<section id="minimum-octane-rating" class="level4">
+<h4 class="anchored" data-anchor-id="minimum-octane-rating">Minimum Octane Rating</h4>
+<p>Regular gasoline:</p>
+<p><span class="math display">\[
+98R_R+102A_R+84S_R
+\ge
+87(R_R+A_R+S_R)
+\]</span></p>
+<p>Mid-grade gasoline:</p>
+<p><span class="math display">\[
+98R_M+102A_M+84S_M
+\ge
+91(R_M+A_M+S_M)
+\]</span></p>
+<p>Premium gasoline:</p>
+<p><span class="math display">\[
+98R_P+102A_P+84S_P
+\ge
+95(R_P+A_P+S_P)
+\]</span></p>
+</section>
+<section id="non-negativity" class="level4">
+<h4 class="anchored" data-anchor-id="non-negativity">Non-negativity</h4>
+<p>All decision variables are greater than or equal to zero.</p>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nikou0986\.github\.io\/optimization-blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

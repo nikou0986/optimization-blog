@@ -2,6 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/simplex method.html",
+      "/posts/simplex method draft.html",
+      "/posts/Why I started this Blog.html",
+      "/posts/integer programing.html",
+      "/posts/Common Applications of Linear Programming Problems (2).html",
+      "/posts/Common Applications of Linear Programming.html",
       "/posts/linear-programming.html"
     ]
   }

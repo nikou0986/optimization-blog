@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Nicole Zhou">
+<meta name="dcterms.date" content="2026-06-30">
 
-<title>Optimization Blog – An Absolute Beginner’s Guide to Optimization</title>
+<title>Why I Started This Optimization Blog – An Absolute Beginner’s Guide to Optimization</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,25 +28,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2a4f2bfc591cd5498fe57ca28617a45d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2a4f2bfc591cd5498fe57ca28617a45d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,67 +72,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -142,7 +84,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">An Absolute Beginner’s Guide to Optimization</span>
     </a>
   </div>
@@ -153,11 +95,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -176,7 +118,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#why-i-started-this-blog" id="toc-why-i-started-this-blog" class="nav-link active" data-scroll-target="#why-i-started-this-blog">Why I Started This Blog</a>
+  <ul class="collapse">
+  <li><a href="#two-ways-to-learn-optimization" id="toc-two-ways-to-learn-optimization" class="nav-link" data-scroll-target="#two-ways-to-learn-optimization">Two Ways to Learn Optimization</a></li>
+  <li><a href="#is-optimization-actually-useful" id="toc-is-optimization-actually-useful" class="nav-link" data-scroll-target="#is-optimization-actually-useful">Is Optimization Actually Useful?</a></li>
+  <li><a href="#why-i-enjoy-it" id="toc-why-i-enjoy-it" class="nav-link" data-scroll-target="#why-i-enjoy-it">Why I Enjoy It</a></li>
+  <li><a href="#a-final-thought" id="toc-a-final-thought" class="nav-link" data-scroll-target="#a-final-thought">A Final Thought</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -185,14 +133,30 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Optimization Blog</h1>
-</div>
+<h1 class="title">Why I Started This Optimization Blog</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Optimization</div>
+    <div class="quarto-category">Personal</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nicole Zhou </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 30, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -202,194 +166,65 @@ window.Quarto = {
 </header>
 
 
-<section id="welcome" class="level1">
-<h1>Welcome</h1>
-<p>This is my blog about optimization.</p>
-
+<section id="why-i-started-this-blog" class="level1">
+<h1>Why I Started This Blog</h1>
+<p>When I first took <strong>Management Science</strong> at Carnegie Mellon University with Professor Holly Wiberg, I honestly had no idea what the subject was about. I assumed it would be something similar to business management or organizational strategy. Instead, I found myself learning about linear programming, duality, network optimization, and algorithms such as the simplex method.</p>
+<p>Professor Wiberg is an incredibly thoughtful teacher: clear, patient, and genuinely supportive of her students. Although I was able to follow the lectures and complete the assignments, I often felt that I was understanding <em>how</em> to solve the problems without fully understanding <em>why</em> everything worked.</p>
+<p>A year later, I had the opportunity to serve as a teaching assistant for <strong>Optimization for Decision Making</strong>, taught by Professor Peter Caulkins. Teaching the material forced me to revisit many concepts that I had only partially understood as a student. I also began reading books such as <em>Introduction to Mathematical Programming</em> and other optimization references, gradually filling in the gaps that had been left during my first exposure to the subject.</p>
+<p>This blog is the result of that journey.</p>
+<p>Its primary purpose is surprisingly selfish: it is my own notebook. Writing is the best way I know to organize ideas and remember concepts. Every post is an attempt to explain something that I once found confusing.</p>
+<p>At the same time, I hope these articles are useful for readers who have little, or even no, background in optimization. If you have not studied mathematics for years, or have always been intimidated by mathematical notation, I hope this series shows that optimization is far more intuitive than it first appears.</p>
+<section id="two-ways-to-learn-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="two-ways-to-learn-optimization">Two Ways to Learn Optimization</h2>
+<p>Through my admittedly limited experience, I think optimization can be understood from two complementary perspectives.</p>
+<p>The first is <strong>problem formulation</strong>.</p>
+<p>This is the art of translating a real-world problem into mathematics. What are the decision variables? What exactly are we trying to optimize? Which constraints represent reality, and which are simplifying assumptions? How do we justify the model, and what are its limitations?</p>
+<p>To me, this is the most creative part of optimization.</p>
+<p>Unlike many machine learning problems, where we use historical data to predict future outcomes, optimization often begins with a blank sheet of paper. We first need to build a mathematical representation of reality before any algorithm can solve it. A well-formulated model is often more valuable than a sophisticated algorithm applied to the wrong problem.</p>
+<p>The second perspective is <strong>the mathematics behind the algorithms</strong>.</p>
+<p>Once the model has been formulated, another fascinating question emerges: <em>How do we actually solve it?</em></p>
+<p>This leads to beautiful ideas from linear algebra, geometry, graph theory, and computer science. Topics such as the simplex method, interior-point methods, branch-and-bound, network flow algorithms, and dynamic programming are not just computational tricks. They each reveal a different way of thinking about optimization.</p>
+<p>This blog will gradually explore both perspectives.</p>
+</section>
+<section id="is-optimization-actually-useful" class="level2">
+<h2 class="anchored" data-anchor-id="is-optimization-actually-useful">Is Optimization Actually Useful?</h2>
+<p>I certainly think so.</p>
+<p>Many optimization models are already embedded in our daily lives. They determine how airlines schedule aircraft, how package delivery routes are planned, how electricity is dispatched across power grids, how hospitals allocate resources, and how bike-sharing systems rebalance bicycles throughout a city.</p>
+<p>Sometimes I even catch myself wondering:</p>
+<blockquote class="blockquote">
+<p>Could optimization be applied to dating or matchmaking?</p>
+</blockquote>
+<p>Whether the answer is yes or no is less interesting than the habit of thinking that optimization develops. Once you begin learning it, you start seeing decision problems everywhere.</p>
+</section>
+<section id="why-i-enjoy-it" class="level2">
+<h2 class="anchored" data-anchor-id="why-i-enjoy-it">Why I Enjoy It</h2>
+<p>What I enjoy most is not necessarily finding the optimal answer, but the process of building a model that captures an incredibly complicated world.</p>
+<p>Reality is messy.</p>
+<p>People are irrational. Information is incomplete. Objectives conflict with one another. Every model is an approximation.</p>
+<p>Optimization constantly asks the same question:</p>
+<blockquote class="blockquote">
+<p><strong>How can we build a mathematical model that is simple enough to solve, yet realistic enough to be useful?</strong></p>
+</blockquote>
+<p>I find that question endlessly fascinating.</p>
+<p>Perhaps surprisingly, this interest has also led me toward psychology and philosophy. Human decisions rarely follow perfect mathematical rules, yet mathematical models often provide remarkably useful approximations. Understanding where those approximations succeed, and where they fail, is just as interesting as the mathematics itself.</p>
+<p>Another pleasant surprise was discovering that the mathematics itself is actually enjoyable.</p>
+<p>Before coming to Carnegie Mellon, I had not seriously studied advanced mathematics for many years. At first, linear algebra and optimization notation looked almost like another language. But as I slowly worked through the ideas, they became much more intuitive than I had expected.</p>
+<p>If someone like me can eventually make sense of these concepts, I hope others can as well.</p>
+</section>
+<section id="a-final-thought" class="level2">
+<h2 class="anchored" data-anchor-id="a-final-thought">A Final Thought</h2>
+<p>Outside optimization, one of my favorite subjects is <strong>epistemology</strong>, the branch of philosophy that asks what knowledge is, how we know something is true, and how we distinguish good reasoning from bad reasoning.</p>
+<p>In many ways, optimization feels connected to that pursuit.</p>
+<p>Both disciplines ask us to start with assumptions, reason carefully, acknowledge limitations, and search for better answers rather than perfect ones.</p>
+<p>Perhaps that is why I enjoy optimization so much.</p>
+<p>It is not only about finding the best solution to a mathematical model.</p>
+<p>It is also about learning how to think clearly in a world that is wonderfully, frustratingly, and beautifully complex.</p>
 
 
 </section>
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="T3B0aW1pemF0aW9uJTJDTGluZWFyJTIwUHJvZ3JhbW1pbmc=" data-listing-date-sort="1785772800000" data-listing-file-modified-sort="1786421537445" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1434">
-<div class="thumbnail"><a href="./posts/simplex method.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/simplex method.html" class="no-external">Simplex Method</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/simplex method.html" class="no-external">
-The simplex method works because linear programming has a special geometric property.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/simplex method.html" class="no-external">
-<div class="listing-date">
-Aug 4, 2026
-</div>
-<div class="listing-author">
-Nicole Zhou
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="T3B0aW1pemF0aW9uJTJDTGluZWFyJTIwUHJvZ3JhbW1pbmc=" data-listing-date-sort="1785772800000" data-listing-file-modified-sort="1786421456999" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1076">
-<div class="thumbnail"><a href="./posts/simplex method draft.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/simplex method draft.html" class="no-external">Simplex Method</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/simplex method draft.html" class="no-external">
-The simplex method works because linear programming has a special geometric property.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/simplex method draft.html" class="no-external">
-<div class="listing-date">
-Aug 4, 2026
-</div>
-<div class="listing-author">
-Nicole Zhou
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="T3B0aW1pemF0aW9uJTJDUGVyc29uYWw=" data-listing-date-sort="1782748800000" data-listing-file-modified-sort="1782807856286" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="840">
-<div class="thumbnail"><a href="./posts/Why I started this Blog.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Why I started this Blog.html" class="no-external">Why I Started This Optimization Blog</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/Why I started this Blog.html" class="no-external">
-When I first took <strong>Management Science</strong> at Carnegie Mellon University with Professor Holly Wiberg, I honestly had no idea what the subject was about. I assumed it would be…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Why I started this Blog.html" class="no-external">
-<div class="listing-date">
-Jun 30, 2026
-</div>
-<div class="listing-author">
-Nicole Zhou
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="T3B0aW1pemF0aW9uJTJDSW50ZWdlciUyMFByb2dyYW1taW5n" data-listing-date-sort="1782662400000" data-listing-file-modified-sort="1785739656152" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1308">
-<div class="thumbnail"><a href="./posts/integer programing.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/integer programing.html" class="no-external">Integer Programming: Optimizing Discrete Decisions</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/integer programing.html" class="no-external">
-In the previous post, we introduced <strong>Linear Programming (LP)</strong>, where decision variables are continuous. This works well when the decision represents a divisible quantity, such…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/integer programing.html" class="no-external">
-<div class="listing-date">
-Jun 29, 2026
-</div>
-<div class="listing-author">
-Nicole Zhou
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="T3B0aW1pemF0aW9uJTJDTGluZWFyJTIwUHJvZ3JhbW1pbmc=" data-listing-date-sort="1782144000000" data-listing-file-modified-sort="1782696543316" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2417">
-<div class="thumbnail"><a href="./posts/Common Applications of Linear Programming Problems (2).html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/images/transportation_table.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Common Applications of Linear Programming Problems (2).html" class="no-external">What Is Linear Programming Used For? Common Applications and Examples in Network Programming</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/Common Applications of Linear Programming Problems (2).html" class="no-external">
-Network optimization is a special class of <strong>linear programming</strong> problems in which decisions are represented on a <strong>network</strong> consisting of <strong>nodes</strong> and <strong>arcs</strong>.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Common Applications of Linear Programming Problems (2).html" class="no-external">
-<div class="listing-date">
-Jun 23, 2026
-</div>
-<div class="listing-author">
-Nicole Zhou
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="T3B0aW1pemF0aW9uJTJDTGluZWFyJTIwUHJvZ3JhbW1pbmc=" data-listing-date-sort="1782144000000" data-listing-file-modified-sort="1782786833996" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1877">
-<div class="thumbnail"><a href="./posts/Common Applications of Linear Programming.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/images/drink.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Common Applications of Linear Programming.html" class="no-external">What Is Linear Programming Used For? Common Applications and Examples （1）</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/Common Applications of Linear Programming.html" class="no-external">
-Product mix determines <strong>how much</strong> of each product to produce or purchase in order to optimize an objective such as minimizing cost or maximizing profit. Decision variables…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Common Applications of Linear Programming.html" class="no-external">
-<div class="listing-date">
-Jun 23, 2026
-</div>
-<div class="listing-author">
-Nicole Zhou
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="T3B0aW1pemF0aW9uJTJDTGluZWFyJTIwUHJvZ3JhbW1pbmc=" data-listing-date-sort="1781971200000" data-listing-file-modified-sort="1785739640678" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1238">
-<div class="thumbnail"><a href="./posts/linear-programming.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/linear-programming.html" class="no-external">Linear Programming: The Foundation of Optimization</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/linear-programming.html" class="no-external">
-A function is linear if:
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/linear-programming.html" class="no-external">
-<div class="listing-date">
-Jun 21, 2026
-</div>
-<div class="listing-author">
-Nicole Zhou
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nicole Zhou">
-<meta name="dcterms.date" content="2026-06-21">
+<meta name="dcterms.date" content="2026-06-29">
 
-<title>Linear Programming: The Foundation of Optimization – An Absolute Beginner’s Guide to Optimization</title>
+<title>Integer Programming: Optimizing Discrete Decisions – An Absolute Beginner’s Guide to Optimization</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -147,38 +147,20 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-linear-programming" id="toc-what-is-linear-programming" class="nav-link active" data-scroll-target="#what-is-linear-programming">1. What is Linear Programming</a>
+  <li><a href="#why-linear-programming-is-not-enough" id="toc-why-linear-programming-is-not-enough" class="nav-link active" data-scroll-target="#why-linear-programming-is-not-enough">Why Linear Programming Is Not Enough</a></li>
+  <li><a href="#integer-vs.-binary-decision-variables" id="toc-integer-vs.-binary-decision-variables" class="nav-link" data-scroll-target="#integer-vs.-binary-decision-variables">Integer vs.&nbsp;Binary Decision Variables</a>
   <ul class="collapse">
-  <li><a href="#what-does-linear-mean" id="toc-what-does-linear-mean" class="nav-link" data-scroll-target="#what-does-linear-mean">What does “Linear” Mean?</a>
-  <ul class="collapse">
-  <li><a href="#linear-examples" id="toc-linear-examples" class="nav-link" data-scroll-target="#linear-examples">Linear Examples</a></li>
-  <li><a href="#nonlinear-examples" id="toc-nonlinear-examples" class="nav-link" data-scroll-target="#nonlinear-examples">Nonlinear Examples</a></li>
+  <li><a href="#general-integer-variables" id="toc-general-integer-variables" class="nav-link" data-scroll-target="#general-integer-variables">General Integer Variables</a></li>
+  <li><a href="#binary-variables" id="toc-binary-variables" class="nav-link" data-scroll-target="#binary-variables">Binary Variables</a></li>
   </ul></li>
-  <li><a href="#why-linear-programming" id="toc-why-linear-programming" class="nav-link" data-scroll-target="#why-linear-programming">Why Linear Programming</a></li>
-  </ul></li>
-  <li><a href="#components-of-a-linear-programming-model" id="toc-components-of-a-linear-programming-model" class="nav-link" data-scroll-target="#components-of-a-linear-programming-model">2. Components of a Linear Programming Model</a>
-  <ul class="collapse">
-  <li><a href="#decision-variables" id="toc-decision-variables" class="nav-link" data-scroll-target="#decision-variables">2.1 Decision Variables</a></li>
-  <li><a href="#coefficientsparameters" id="toc-coefficientsparameters" class="nav-link" data-scroll-target="#coefficientsparameters">2.2 Coefficients(Parameters)</a></li>
-  <li><a href="#objective-function" id="toc-objective-function" class="nav-link" data-scroll-target="#objective-function">3.3 Objective Function</a>
-  <ul class="collapse">
-  <li><a href="#examples-of-linear-objective-functions" id="toc-examples-of-linear-objective-functions" class="nav-link" data-scroll-target="#examples-of-linear-objective-functions">Examples of Linear Objective Functions</a></li>
-  </ul></li>
-  <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints">3.4 Constraints</a>
-  <ul class="collapse">
-  <li><a href="#examples-of-constraints" id="toc-examples-of-constraints" class="nav-link" data-scroll-target="#examples-of-constraints">Examples of Constraints</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#standard-form-of-linear-programming" id="toc-standard-form-of-linear-programming" class="nav-link" data-scroll-target="#standard-form-of-linear-programming">3.Standard Form of Linear Programming</a>
-  <ul class="collapse">
-  <li><a href="#slack-variables" id="toc-slack-variables" class="nav-link" data-scroll-target="#slack-variables">Slack Variables</a></li>
-  <li><a href="#surplus-variables" id="toc-surplus-variables" class="nav-link" data-scroll-target="#surplus-variables">Surplus Variables</a></li>
-  <li><a href="#matrix-form" id="toc-matrix-form" class="nav-link" data-scroll-target="#matrix-form">Matrix Form</a>
-  <ul class="collapse">
-  <li><a href="#objective-function-1" id="toc-objective-function-1" class="nav-link" data-scroll-target="#objective-function-1">Objective Function</a></li>
-  <li><a href="#constraints-1" id="toc-constraints-1" class="nav-link" data-scroll-target="#constraints-1">Constraints</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#common-integer-programming-problem-types" id="toc-common-integer-programming-problem-types" class="nav-link" data-scroll-target="#common-integer-programming-problem-types">Common Integer Programming Problem Types</a></li>
+  <li><a href="#knapsack-problem" id="toc-knapsack-problem" class="nav-link" data-scroll-target="#knapsack-problem">Knapsack Problem</a></li>
+  <li><a href="#assignment-problem" id="toc-assignment-problem" class="nav-link" data-scroll-target="#assignment-problem">Assignment Problem</a></li>
+  <li><a href="#set-covering-problem" id="toc-set-covering-problem" class="nav-link" data-scroll-target="#set-covering-problem">Set Covering Problem</a></li>
+  <li><a href="#set-partitioning-problem" id="toc-set-partitioning-problem" class="nav-link" data-scroll-target="#set-partitioning-problem">Set Partitioning Problem</a></li>
+  <li><a href="#traveling-salesman-problem" id="toc-traveling-salesman-problem" class="nav-link" data-scroll-target="#traveling-salesman-problem">Traveling Salesman Problem</a></li>
+  <li><a href="#scheduling-problems" id="toc-scheduling-problems" class="nav-link" data-scroll-target="#scheduling-problems">Scheduling Problems</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -187,10 +169,10 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Linear Programming: The Foundation of Optimization</h1>
+<h1 class="title">Integer Programming: Optimizing Discrete Decisions</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Optimization</div>
-    <div class="quarto-category">Linear Programming</div>
+    <div class="quarto-category">Integer Programming</div>
   </div>
   </div>
 
@@ -208,7 +190,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 21, 2026</p>
+      <p class="date">June 29, 2026</p>
     </div>
   </div>
   
@@ -220,221 +202,401 @@ window.Quarto = {
 </header>
 
 
-<section id="what-is-linear-programming" class="level1">
-<h1>1. What is Linear Programming</h1>
-<section id="what-does-linear-mean" class="level2">
-<h2 class="anchored" data-anchor-id="what-does-linear-mean">What does “Linear” Mean?</h2>
-<p>A function is linear if:</p>
+<section id="why-linear-programming-is-not-enough" class="level2">
+<h2 class="anchored" data-anchor-id="why-linear-programming-is-not-enough">Why Linear Programming Is Not Enough</h2>
+<p>In the previous post, we introduced <strong>Linear Programming (LP)</strong>, where decision variables are continuous. This works well when the decision represents a divisible quantity, such as the amount of products to manufacture, electricity to generate, or goods to transport.</p>
+<p>However, many real-world optimization problems involve <strong>discrete decisions</strong> rather than continuous quantities.</p>
+<p>For example:</p>
 <ul>
-<li>Variables only appear to the first power.</li>
+<li>Should a new warehouse be built?</li>
+<li>Which projects should receive funding?</li>
+<li>Which employee should be assigned to a task?</li>
+<li>What is the shortest route that visits every customer exactly once?</li>
 </ul>
-<p>This means that:</p>
+<p>These decisions cannot take fractional values. A warehouse cannot be built halfway, an employee cannot perform <span class="math inline">\(0.4\)</span> of a job, and a project cannot be selected <span class="math inline">\(1.7\)</span> times.</p>
+<p>If these problems were modeled using Linear Programming, the optimal solution might contain fractional values that are mathematically feasible but practically meaningless.</p>
+<p>To model such problems, we require decision variables to take <strong>integer values</strong>. This leads to <strong>Integer Programming (IP)</strong>.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Integer Programming is useful when the decision is <strong>indivisible</strong>. The decision variable must represent a whole number or a yes-or-no choice.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="integer-vs.-binary-decision-variables" class="level2">
+<h2 class="anchored" data-anchor-id="integer-vs.-binary-decision-variables">Integer vs.&nbsp;Binary Decision Variables</h2>
+<p>Integer decision variables generally fall into two categories.</p>
+<section id="general-integer-variables" class="level3">
+<h3 class="anchored" data-anchor-id="general-integer-variables">General Integer Variables</h3>
+<p>Some decisions represent <strong>discrete quantities</strong>, where only whole numbers are meaningful.</p>
+<p>Examples include:</p>
 <ul>
-<li>Variables are not multiplied together.</li>
-<li>Variables are not divided by each other.</li>
-<li>No logarithms, exponentials, or trigonometric functions appear.</li>
+<li>Number of buses to purchase</li>
+<li>Number of workers to hire</li>
+<li>Number of machines to install</li>
 </ul>
-<section id="linear-examples" class="level3">
-<h3 class="anchored" data-anchor-id="linear-examples">Linear Examples</h3>
-<p><span class="math display">\[3x + 5y \le 100\]</span></p>
-<p><span class="math display">\[\frac{1}{2}x + \frac{3}{4}y \le 20\]</span></p>
-<p><span class="math display">\[2(x+y) \le 5\]</span></p>
+<p>These variables satisfy</p>
+<p><span class="math display">\[
+x\in\mathbb{Z},
+\]</span></p>
+<p>where <span class="math inline">\(\mathbb{Z}\)</span> denotes the set of integers.</p>
 </section>
-<section id="nonlinear-examples" class="level3">
-<h3 class="anchored" data-anchor-id="nonlinear-examples">Nonlinear Examples</h3>
-<p><span class="math display">\[xy \le 100\]</span> <span class="math display">\[\frac{x}{y} \le 20\]</span> <span class="math display">\[\frac{1}{x} \le 3\]</span> <span class="math display">\[2xy + z \le 5\]</span></p>
-</section>
-</section>
-<section id="why-linear-programming" class="level2">
-<h2 class="anchored" data-anchor-id="why-linear-programming">Why Linear Programming</h2>
-<p>Many real-world decision problems can be approximated using linear relationships. For example, suppose a factory produces identical water bottles and earns $2 profit on each bottle sold. Producing 100 bottles generates $200 profit, while producing 200 bottles generates $400 profit. Each additional bottle increases profit by exactly $2, making the relationship linear.</p>
-<p>Linear programming is attractive because it is:</p>
+<section id="binary-variables" class="level3">
+<h3 class="anchored" data-anchor-id="binary-variables">Binary Variables</h3>
+<p>Many optimization problems involve <strong>yes-or-no decisions</strong>.</p>
+<p>Examples include:</p>
 <ul>
-<li>Intuitive and easy to explain.</li>
-<li>Often a reasonable approximation of more complex systems.</li>
+<li>Should this warehouse be opened?</li>
+<li>Should this project be selected?</li>
+<li>Should worker <span class="math inline">\(i\)</span> be assigned to job <span class="math inline">\(j\)</span>?</li>
 </ul>
-<p>Of course, real-world systems are often more complicated than a linear programming model suggests. Once we introduce assumptions such as economies of scale, learning effects, nonlinear costs, or interactions between decisions, the relationship may no longer be linear. Nevertheless, linear programming provides a useful starting point and serves as the foundation for more advanced optimization methods.</p>
-</section>
-</section>
-<section id="components-of-a-linear-programming-model" class="level1">
-<h1>2. Components of a Linear Programming Model</h1>
-<p>Every linear programming model contains four main components:</p>
-<ol type="1">
-<li>Decision Variables</li>
-<li>Coefficients(parameters)</li>
-<li>Objective Function</li>
-<li>Constraints</li>
-</ol>
-<p>Both the objective function and all constraints must satisfy the rules of linearity to be a linear programming problem</p>
-<section id="decision-variables" class="level2">
-<h2 class="anchored" data-anchor-id="decision-variables">2.1 Decision Variables</h2>
-<p>DDecision variables represent the choices we can make, but whose values are <strong>unknown</strong>. The optimization model determines these values to optimize the objective while satisfying all constraints.</p>
-<p>There is no single “correct” notation for decision variables. The notation should clearly reflect the decisions being modeled.</p>
+<p>These decisions are naturally modeled using binary variables,</p>
+<p><span class="math display">\[
+x\in\{0,1\},
+\]</span></p>
+<p>where</p>
 <ul>
-<li><p><strong>One-dimensional:</strong> A single index identifies each decision, e.g., <span class="math inline">\(x_i\)</span>. The index may be <strong>numeric</strong>, such as <span class="math inline">\(i=1,\ldots,10\)</span> (products 1–10), or represent a <strong>set</strong>, such as <span class="math inline">\(i \in P\)</span>, where <span class="math inline">\(P=\{\text{Apple},\text{Orange},\text{Kiwi},\text{Strawberry}\}\)</span>. Variable names are also flexible—for example, <span class="math inline">\(M_i\)</span> and <span class="math inline">\(B_i\)</span> may denote quantities manufactured and purchased, respectively.</p></li>
-<li><p><strong>Multi-dimensional:</strong> Additional indices represent additional dimensions of the decision, such as facilities, products, locations, technologies, or time periods.</p></li>
+<li><span class="math inline">\(1\)</span> indicates <strong>Yes</strong> or <strong>selected</strong>,</li>
+<li><span class="math inline">\(0\)</span> indicates <strong>No</strong> or <strong>not selected</strong>.</li>
 </ul>
-<p>As more dimensions are included, the notation naturally expands. For example, if we are modeling production:</p>
+<p>Because binary variables are integers restricted to two possible values, <strong>Binary Integer Programming (BIP)</strong> is a special case of Integer Programming.</p>
+</section>
+</section>
+<section id="common-integer-programming-problem-types" class="level2">
+<h2 class="anchored" data-anchor-id="common-integer-programming-problem-types">Common Integer Programming Problem Types</h2>
+<p>Many real-world optimization problems can be represented using a small number of classical Integer Programming formulations.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 31%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Problem Type</th>
+<th style="text-align: left;">Main Decision</th>
+<th style="text-align: left;">Typical Variable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Knapsack</td>
+<td style="text-align: left;">Which items should be selected?</td>
+<td style="text-align: left;">Binary</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Assignment</td>
+<td style="text-align: left;">Which resource should be assigned to which task?</td>
+<td style="text-align: left;">Binary</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Set Covering</td>
+<td style="text-align: left;">Which sets should be selected to cover all requirements?</td>
+<td style="text-align: left;">Binary</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Set Partitioning</td>
+<td style="text-align: left;">Which sets should be selected so every element is covered exactly once?</td>
+<td style="text-align: left;">Binary</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Facility Location</td>
+<td style="text-align: left;">Which facilities should be opened?</td>
+<td style="text-align: left;">Binary + continuous</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Traveling Salesman Problem</td>
+<td style="text-align: left;">What is the shortest tour visiting every city once?</td>
+<td style="text-align: left;">Binary</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Scheduling</td>
+<td style="text-align: left;">Which jobs should be performed, and in what order?</td>
+<td style="text-align: left;">Binary / integer</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="knapsack-problem" class="level2">
+<h2 class="anchored" data-anchor-id="knapsack-problem">Knapsack Problem</h2>
+<p>The <strong>Knapsack Problem</strong> is one of the simplest and most important Integer Programming models.</p>
+<p>Suppose we have a limited budget, capacity, or resource. We must decide which items to select in order to maximize total value without exceeding the limit.</p>
+<p>The decision variable is</p>
+<p><span class="math display">\[
+x_i=
+\begin{cases}
+1, &amp; \text{if item } i \text{ is selected},\\
+0, &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>A basic knapsack model is</p>
+<p><span class="math display">\[
+\max \sum_{i\in I} v_i x_i
+\]</span></p>
+<p>subject to</p>
+<p><span class="math display">\[
+\sum_{i\in I} w_i x_i \le C,
+\]</span></p>
+<p><span class="math display">\[
+x_i\in\{0,1\},
+\qquad
+\forall i\in I.
+\]</span></p>
+<p>where</p>
 <ul>
-<li><span class="math inline">\(M_p\)</span>: quantity of product <span class="math inline">\(p\)</span> manufactured internally.</li>
-<li><span class="math inline">\(M_{i,p}\)</span>: quantity of product <span class="math inline">\(p\)</span> manufactured at facility <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\(M_{i,p,t}\)</span>: quantity of product <span class="math inline">\(p\)</span> manufactured at facility <span class="math inline">\(i\)</span> during time period <span class="math inline">\(t\)</span>.</li>
-<li><span class="math inline">\(M^{\text{int}}_{i,p}\)</span>: quantity of product <span class="math inline">\(p\)</span> manufactured internally at facility <span class="math inline">\(i\)</span>, where the superscript distinguishes the production mode.</li>
+<li><span class="math inline">\(v_i\)</span> is the value of item <span class="math inline">\(i\)</span>,</li>
+<li><span class="math inline">\(w_i\)</span> is the weight or resource requirement of item <span class="math inline">\(i\)</span>,</li>
+<li><span class="math inline">\(C\)</span> is the total capacity.</li>
 </ul>
-<p>Here, <span class="math inline">\(i \in F\)</span> (facilities), <span class="math inline">\(p \in P\)</span> (products), and <span class="math inline">\(t \in T\)</span> (time periods). In general, choose the notation that best represents the dimensions of the problem while remaining easy to interpret.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The knapsack problem is about <strong>selection under a limit</strong>: choose the best combination of items without exceeding capacity.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="coefficientsparameters" class="level2">
-<h2 class="anchored" data-anchor-id="coefficientsparameters">2.2 Coefficients(Parameters)</h2>
-<p>Coefficients are the known constants that appear in the objective function and constraints. They describe how decision variables contribute to the objective and how they consume resources.</p>
+<section id="assignment-problem" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-problem">Assignment Problem</h2>
+<p>The <strong>Assignment Problem</strong> is a special case of the transportation problem, but it is usually formulated as a binary Integer Programming problem.</p>
+<p>In an assignment problem, each source has a supply of one unit and each destination has a demand of one unit. For example, each worker can be assigned to one job, and each job needs exactly one worker.</p>
+<p>The decision variable is</p>
+<p><span class="math display">\[
+x_{ij}=
+\begin{cases}
+1, &amp; \text{if worker } i \text{ is assigned to job } j,\\
+0, &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>The objective is often to minimize assignment cost:</p>
+<p><span class="math display">\[
+\min \sum_{i\in I}\sum_{j\in J} c_{ij}x_{ij}.
+\]</span></p>
+<p>Each worker is assigned to exactly one job:</p>
+<p><span class="math display">\[
+\sum_{j\in J}x_{ij}=1,
+\qquad
+\forall i\in I.
+\]</span></p>
+<p>Each job receives exactly one worker:</p>
+<p><span class="math display">\[
+\sum_{i\in I}x_{ij}=1,
+\qquad
+\forall j\in J.
+\]</span></p>
+<p>Finally,</p>
+<p><span class="math display">\[
+x_{ij}\in\{0,1\}.
+\]</span></p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The assignment problem can be viewed as a transportation problem where every supply and every demand equals <span class="math inline">\(1\)</span>. The binary variable ensures that the assignment is either made or not made.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="set-covering-problem" class="level2">
+<h2 class="anchored" data-anchor-id="set-covering-problem">Set Covering Problem</h2>
+<p>The <strong>Set Covering Problem</strong> asks:</p>
+<blockquote class="blockquote">
+<p>What is the minimum-cost collection of sets that covers all required elements?</p>
+</blockquote>
+<p>A common example is facility coverage. Suppose we need to choose fire stations so that every neighborhood is covered by at least one station.</p>
+<p>Let</p>
+<p><span class="math display">\[
+x_j=
+\begin{cases}
+1, &amp; \text{if set } j \text{ is selected},\\
+0, &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>The objective is</p>
+<p><span class="math display">\[
+\min \sum_{j\in J} c_jx_j.
+\]</span></p>
+<p>Each requirement must be covered at least once:</p>
+<p><span class="math display">\[
+\sum_{j\in J_i}x_j\ge 1,
+\qquad
+\forall i\in I.
+\]</span></p>
+<p>where <span class="math inline">\(J_i\)</span> is the set of options that can cover requirement <span class="math inline">\(i\)</span>.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Set covering means <strong>at least one</strong> selected option must cover each requirement.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="set-partitioning-problem" class="level2">
+<h2 class="anchored" data-anchor-id="set-partitioning-problem">Set Partitioning Problem</h2>
+<p>The <strong>Set Partitioning Problem</strong> is similar to set covering, but it is stricter.</p>
+<p>Instead of requiring each element to be covered <strong>at least once</strong>, set partitioning requires each element to be covered <strong>exactly once</strong>.</p>
+<p>The model is</p>
+<p><span class="math display">\[
+\min \sum_{j\in J} c_jx_j
+\]</span></p>
+<p>subject to</p>
+<p><span class="math display">\[
+\sum_{j\in J_i}x_j=1,
+\qquad
+\forall i\in I,
+\]</span></p>
+<p><span class="math display">\[
+x_j\in\{0,1\}.
+\]</span></p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Set covering uses <span class="math inline">\(\ge 1\)</span>, while set partitioning uses <span class="math inline">\(=1\)</span>.</p>
 <ul>
-<li><p>In the <strong>objective function</strong>, coefficients typically represent quantities such as <strong>profit and cost</strong>. They are often denoted by <strong><span class="math inline">\(c_i\)</span></strong>. For example, if producing one unit of product <span class="math inline">\(i\)</span> generates $10 profit, then <span class="math inline">\(c_i = 10\)</span>.</p></li>
-<li><p>In the <strong>constraints</strong>, coefficients represent the amount of a <strong>resource consumed</strong> or produced by a decision. For example, if producing one unit of product <span class="math inline">\(i\)</span> requires 2 hours of labor, then the corresponding coefficient in the labor constraint is 2.</p></li>
+<li><strong>Set covering:</strong> every requirement must be covered at least once.</li>
+<li><strong>Set partitioning:</strong> every requirement must be covered exactly once.</li>
 </ul>
-<p>A key assumption in linear programming is that these coefficients are known with certainty. In practice, however, they may change due to uncertainty or changing conditions. The impact of changes in the coefficients can be studied using <strong>sensitivity analysis</strong>, which will be discussed later.</p>
+</div>
+</div>
+</div>
+<p>Set partitioning is commonly used in problems such as airline crew scheduling, vehicle routing, and task assignment, where each flight, customer, or task must be assigned to exactly one feasible route or schedule.</p>
 </section>
-<section id="objective-function" class="level2">
-<h2 class="anchored" data-anchor-id="objective-function">3.3 Objective Function</h2>
-<p>In a linear programming model, the objective is either maximization or minimization. For example:</p>
+<section id="traveling-salesman-problem" class="level2">
+<h2 class="anchored" data-anchor-id="traveling-salesman-problem">Traveling Salesman Problem</h2>
+<p>The <strong>Traveling Salesman Problem (TSP)</strong> asks:</p>
+<blockquote class="blockquote">
+<p>What is the shortest route that visits every city exactly once and returns to the starting city?</p>
+</blockquote>
+<p>The TSP is a classic combinatorial optimization problem. It is not simply a shortest path problem, because the route must visit <strong>all cities exactly once</strong> before returning to the starting point.</p>
+<p>Let</p>
+<p><span class="math display">\[
+x_{ij}=
+\begin{cases}
+1, &amp; \text{if the route travels directly from city } i \text{ to city } j,\\
+0, &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>The objective is</p>
+<p><span class="math display">\[
+\min \sum_{i\in N}\sum_{j\in N} c_{ij}x_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(c_{ij}\)</span> is the distance or travel cost from city <span class="math inline">\(i\)</span> to city <span class="math inline">\(j\)</span>.</p>
+<p>Each city must be entered exactly once:</p>
+<p><span class="math display">\[
+\sum_{i\in N}x_{ij}=1,
+\qquad
+\forall j\in N.
+\]</span></p>
+<p>Each city must be left exactly once:</p>
+<p><span class="math display">\[
+\sum_{j\in N}x_{ij}=1,
+\qquad
+\forall i\in N.
+\]</span></p>
+<p>Additional constraints are needed to eliminate <strong>subtours</strong>, which are smaller disconnected cycles that do not visit every city in one complete tour.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The TSP is not the same as the shortest path problem. The shortest path problem finds the cheapest path from one node to another, while the TSP finds the cheapest tour that visits every node exactly once.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="scheduling-problems" class="level2">
+<h2 class="anchored" data-anchor-id="scheduling-problems">Scheduling Problems</h2>
+<p>Scheduling problems ask:</p>
+<blockquote class="blockquote">
+<p>Which jobs should be performed, when should they be performed, and in what order?</p>
+</blockquote>
+<p>Many scheduling problems are modeled as Integer Programming or Mixed Integer Programming problems because they involve discrete decisions.</p>
+<p>For example,</p>
+<p><span class="math display">\[
+x_{it}=
+\begin{cases}
+1, &amp; \text{if job } i \text{ starts at time } t,\\
+0, &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>Scheduling can also be connected to set covering or set partitioning. For example, in workforce scheduling, each feasible work pattern can be treated as a set of shifts covered by one employee. The optimization then chooses a collection of work patterns so that all required shifts are covered.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Scheduling is an application area, while set covering and set partitioning are mathematical formulations. Some scheduling problems can be formulated as set covering or set partitioning problems.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Integer Programming is used when decision variables must represent <strong>whole numbers</strong> or <strong>yes-or-no choices</strong>. It is especially useful for problems involving selection, assignment, routing, facility location, and scheduling.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: left;">Core Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Knapsack</td>
+<td style="text-align: left;">Select the best items under a capacity limit</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Assignment</td>
+<td style="text-align: left;">Match resources to tasks one-to-one</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Set Covering</td>
+<td style="text-align: left;">Cover every requirement at least once</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Set Partitioning</td>
+<td style="text-align: left;">Cover every requirement exactly once</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Traveling Salesman Problem</td>
+<td style="text-align: left;">Find the shortest tour visiting every city once</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scheduling</td>
+<td style="text-align: left;">Decide timing, ordering, or resource assignment</td>
+</tr>
+</tbody>
+</table>
+<p>The main difference between LP and IP is not the objective function or constraint structure. Both can still be linear. The key difference is the <strong>domain of the decision variables</strong>.</p>
 <ul>
-<li><strong>Maximize</strong> something desirable, such as profit, revenue, production output, or customer satisfaction points.</li>
-<li><strong>Minimize</strong> something undesirable, such as cost, emissions, waste, or transportation distance.</li>
+<li>LP allows continuous decision variables.</li>
+<li>IP restricts some or all decision variables to integers.</li>
+<li>Binary IP restricts variables to <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>.</li>
 </ul>
-<p>If there are multiple objectives that we would like to optimize simultaneously, we might turn to <strong>goal programming</strong>, which can be viewed as an extension of linear programming designed to handle multiple objectives.</p>
-<section id="examples-of-linear-objective-functions" class="level3">
-<h3 class="anchored" data-anchor-id="examples-of-linear-objective-functions">Examples of Linear Objective Functions</h3>
-<p>The objective function can either <strong>maximize</strong> a desirable quantity (e.g., profit or revenue) or <strong>minimize</strong> an undesirable quantity (e.g., cost, time, emissions, or risk).</p>
-<p><strong>Profit maximization</strong></p>
-<p><span class="math display">\[
-\max z = \sum_{i=1}^{n} p_i x_i
-\]</span></p>
-<p>where <span class="math inline">\(p_i\)</span> is the profit earned per unit of decision variable <span class="math inline">\(x_i\)</span>.</p>
-<p><strong>Cost minimization</strong></p>
-<p><span class="math display">\[
-\min z = \sum_{i=1}^{m}\sum_{j=1}^{n} c_{ij}x_{ij}
-\]</span></p>
-<p>where <span class="math inline">\(c_{ij}\)</span> is the unit transportation cost from source <span class="math inline">\(i\)</span> to destination <span class="math inline">\(j\)</span>.</p>
-<p><strong>Emission minimization</strong></p>
-<p><span class="math display">\[
-\min z = \sum_{i=1}^{m}\sum_{j=1}^{n}\sum_{t=1}^{T} e_{ijt}x_{ijt}
-\]</span></p>
-<p>where <span class="math inline">\(e_{ijt}\)</span> is the emissions associated with decision <span class="math inline">\(x_{ijt}\)</span> during time period <span class="math inline">\(t\)</span>.</p>
-<p>Although the notation varies across applications, every linear objective function follows the same structure:</p>
-<p><span class="math display">\[
-\text{Objective}=\sum (\text{coefficient} \times \text{decision variable})
-\]</span></p>
-<p>The coefficients represent the contribution of each decision to the objective (e.g., profit, cost, or emissions), while the optimization model chooses the decision variables to maximize or minimize the total.</p>
-</section>
-</section>
-<section id="constraints" class="level2">
-<h2 class="anchored" data-anchor-id="constraints">3.4 Constraints</h2>
-<p>Constraints represent limitations on our decisions. They define what solutions are feasible and what solutions are not. In a linear programming model, constraints are typically written using the relationships <span class="math inline">\(\leq\)</span>, <span class="math inline">\(\geq\)</span>, or <span class="math inline">\(=\)</span>.</p>
-<p>Constraints can involve continuous, integer, or binary decision variables. If all decision variables are required to take integer values, the problem becomes an Integer Programming (IP) problem. If some decision variables are integer while others are continuous, the problem becomes a Mixed Integer Programming (MIP) problem.</p>
-<section id="examples-of-constraints" class="level3">
-<h3 class="anchored" data-anchor-id="examples-of-constraints">Examples of Constraints</h3>
-<p>Some common examples include:</p>
-<ul>
-<li><strong>Capacity constraints:</strong> A factory may not be able to produce more than 100 units, so we write <span class="math inline">\(x_1 + x_2 \leq 100\)</span>.</li>
-<li><strong>Demand constraints:</strong> A customer may require at least 50 units of product, so we write <span class="math inline">\(x_1 + x_2 \geq 50\)</span>.</li>
-<li><strong>Balance constraints:</strong> Material entering a process must equal material leaving the process, so we write <span class="math inline">\(x_1 + x_2 = 75\)</span>.</li>
-<li><strong>Non-negativity constraints:</strong> Production quantities cannot be negative, so we write <span class="math inline">\(x_i \geq 0\)</span>.</li>
-</ul>
-<p>Constraints can involve continuous, integer, or binary decision variables.</p>
-<ul>
-<li>If all decision variables are required to take integer values, the problem becomes an <strong>Integer Programming (IP)</strong> problem.</li>
-<li>If some decision variables are integer while others are continuous, the problem becomes a <strong>Mixed Integer Programming (MIP)</strong> problem.</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="standard-form-of-linear-programming" class="level1">
-<h1>3.Standard Form of Linear Programming</h1>
-<p>Historically, algorithms such as the Simplex Method were developed for the standard form</p>
-<p><span class="math display">\[
-Ax=b,\qquad x\ge0.
-\]</span></p>
-<p>Modern solvers (e.g., Excel Solver, Gurobi, and CPLEX) allow users to enter inequalities directly, but internally they often convert them to an equivalent standard form.</p>
-<section id="slack-variables" class="level3">
-<h3 class="anchored" data-anchor-id="slack-variables">Slack Variables</h3>
-<p>A “less-than-or-equal-to” constraint</p>
-<p><span class="math display">\[
-2x+y\le10
-\]</span></p>
-<p>is converted to an equality by adding a nonnegative <strong>slack variable</strong>:</p>
-<p><span class="math display">\[
-2x+y+s=10,\qquad s\ge0.
-\]</span></p>
-<p>The slack variable measures unused capacity.</p>
-</section>
-<section id="surplus-variables" class="level3">
-<h3 class="anchored" data-anchor-id="surplus-variables">Surplus Variables</h3>
-<p>A “greater-than-or-equal-to” constraint</p>
-<p><span class="math display">\[
-2x+y\ge10
-\]</span></p>
-<p>is converted by subtracting a nonnegative <strong>surplus variable</strong>:</p>
-<p><span class="math display">\[
-2x+y-s=10,\qquad s\ge0.
-\]</span></p>
-<p>The surplus variable measures the amount by which the minimum requirement is exceeded.</p>
-</section>
-<section id="matrix-form" class="level2">
-<h2 class="anchored" data-anchor-id="matrix-form">Matrix Form</h2>
-<p>Although optimization models are often written using summation notation, many algorithms use a compact matrix representation.</p>
-<p>A linear programming model can be written as</p>
-<p><span class="math display">\[
-\begin{aligned}
-\max \; &amp; c^T x \\
-\text{s.t.}\; &amp; Ax \le b, \\
-&amp; x \ge 0,
-\end{aligned}
-\]</span></p>
-<p>or equivalently as a minimization problem.</p>
-<p>Here,</p>
-<ul>
-<li><span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span> is the coefficient matrix,</li>
-<li><span class="math inline">\(x \in \mathbb{R}^{n}\)</span> is the vector of decision variables,</li>
-<li><span class="math inline">\(b \in \mathbb{R}^{m}\)</span> is the vector of constraint constants,</li>
-<li><span class="math inline">\(c \in \mathbb{R}^{n}\)</span> is the vector of objective coefficients.</li>
-</ul>
-<p>This compact notation can represent optimization models containing thousands or even millions of decision variables and constraints.</p>
-<section id="objective-function-1" class="level3">
-<h3 class="anchored" data-anchor-id="objective-function-1">Objective Function</h3>
-<p>The matrix expression</p>
-<p><span class="math display">\[
-c^Tx
-\]</span></p>
-<p>is simply the dot product of the coefficient vector and decision-variable vector:</p>
-<p><span class="math display">\[
-c^Tx
-=
-c_1x_1+c_2x_2+\cdots+c_nx_n.
-\]</span></p>
-<p>Even if the original decision variables are indexed (e.g., <span class="math inline">\(x_{ij}\)</span> or <span class="math inline">\(x_{ijt}\)</span>), they can always be rearranged into a single vector without changing the mathematical model.</p>
-</section>
-<section id="constraints-1" class="level3">
-<h3 class="anchored" data-anchor-id="constraints-1">Constraints</h3>
-<p>A single linear constraint has the form</p>
-<p><span class="math display">\[
-a_1x_1+a_2x_2+\cdots+a_nx_n
-\le,\;=,\;\text{or}\;\ge
-b.
-\]</span></p>
-<p>With multiple constraints, we simply stack them together:</p>
-<p><span class="math display">\[
-Ax \le b,\qquad
-Ax=b,\qquad
-\text{or}\qquad
-Ax\ge b.
-\]</span></p>
-<p>The matrix multiplication is valid because</p>
-<p><span class="math display">\[
-(m\times n)(n\times1)=(m\times1),
-\]</span></p>
-<p>producing one equation for each constraint.</p>
+<p>This makes Integer Programming especially powerful for modeling real-world decisions that are discrete, indivisible, or logical.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
